@@ -13,31 +13,15 @@ export const Searchbar = () => {
     const [manufacturer, setManufacturer] = useState('')
     const [model, setModel] = useState('')
     const [models, setModels] = useState([''])
-    const [imgLink, setImgLink]=useState([]) 
+    const [imgLink, setImgLink] = useState([])
     const getImgLink = async () => {
         console.log('img1')
         setImgLink([])
-        if(model.toLowerCase()=== 'taycan' && manufacturer.toLowerCase()==='porsche'){
-            console.log('img')
-            setImgLink([{full:'/taycanvitalya.png'}])
-        }
-        else if(model.toLowerCase()=== 'm6' && manufacturer.toLowerCase()==='bmw'){
-            console.log('img')
-            setImgLink([{full:'/bmwvitalya.png'}])
-        }
-        else if(model.toLowerCase()=== 'model x' && manufacturer.toLowerCase()==='tesla'){
-            console.log('img')
-            setImgLink([{full:'/tesla_vitalya.png'}])
-        }
-        else if(model.toLowerCase()=== 'challenger' && manufacturer.toLowerCase()==='dodge'){
-            console.log('img')
-            setImgLink([{full:'/dodge_vitalya.png'}])
-        }
-         else if (model !== '' && manufacturer !=='' ){
+        if (model !== '' && manufacturer !== '') {
             console.log('get img')
             const response = await fetchCars(`https://api.unsplash.com/search/photos?page=1&query=${manufacturer}+${model}&client_id=skx5xxAVPk6YVknr4plxaM3SzEp0_TE_Zw_rpOcpUvU`)
             console.log(response)
-            const allLinks = response.results.map((item:any) => item.urls);
+            const allLinks = response.results.map((item: any) => item.urls);
             setImgLink(allLinks)
         }
     }
@@ -64,8 +48,8 @@ export const Searchbar = () => {
                 <CustomButton title='search' containerStyles={`${manufacturer !== '' && model !== '' ? 'block' : 'hidden'}`} handleClick={getImgLink} ></CustomButton>
             </div>
             <div className="flex gap-5 max-w-[1440px] mx-auto max-md:flex-col  flex-wrap mt-[20px] mb-[20px] mx-auto px-10">
-                <CarCard carInfo={{ name: manufacturer, model: model ,imgLink:imgLink}} />
-                
+                <CarCard carInfo={{ name: manufacturer, model: model, imgLink: imgLink }} />
+
             </div>
         </>
     )
