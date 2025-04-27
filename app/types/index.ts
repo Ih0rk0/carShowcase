@@ -27,10 +27,14 @@ export type Car = {
 //     thumb: string,
 //     small_s3: string
 // }
+type UrlsItem = {
+full:string, raw:string, regular:string, small:string , small_s3:string, thumb:string
+  };
+
 export interface CarInfo {
     name: string,
     model: string,
-    imgLink: any
+    imgLink:  UrlsItem[];
 }
 export type SearchbarProps = {
     render: (carInfo: Car) => React.ReactNode;

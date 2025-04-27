@@ -3,11 +3,19 @@ import React, { useState, useEffect } from 'react'
 import { SearchManufacturer } from './SearchManufacturer'
 import { manufacturers } from '@/app/constants';
 import { fetchCars } from '@/app/utils';
-import { Car, Links } from '@/app/types';
-import Image from 'next/image';
+import { Car } from '@/app/types';
+
 import { CustomButton } from './CustomButton';
 import { CarCard } from './CarCard'
-
+type UnsplashItem = {
+    urls: {
+      full: string;
+      small: string;
+      thumb: string;
+      regular: string;
+      [key: string]: string; // якщо треба більше варіацій
+    };
+  };
 
 export const Searchbar = () => {
     const [manufacturer, setManufacturer] = useState('')
@@ -21,7 +29,8 @@ export const Searchbar = () => {
             console.log('get img')
             const response = await fetchCars(`https://api.unsplash.com/search/photos?page=1&query=${manufacturer}+${model}&client_id=skx5xxAVPk6YVknr4plxaM3SzEp0_TE_Zw_rpOcpUvU`)
             console.log(response)
-            const allLinks = response.results.map((item: any) => item.urls);
+            
+            const allLinks = response.results.map((item: UnsplashItem) => item.urls);
             setImgLink(allLinks)
         }
     }
