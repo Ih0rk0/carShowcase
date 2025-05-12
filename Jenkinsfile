@@ -36,7 +36,7 @@ pipeline {
 
     stage('Publish JUnit Results') {
       steps {
-        junit 'junit.xml'
+        junit 'reports/junit/junit.xml'
       }
     }
 
