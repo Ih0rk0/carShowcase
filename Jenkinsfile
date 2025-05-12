@@ -15,29 +15,29 @@ pipeline {
 
     stage('Install') {
       steps {
-        sh 'npm ci'
+        bat 'npm ci'
       }
     }
 
     stage('Build') {
       steps {
-        sh 'npm run build'
+        bat 'npm run build'
       }
     }
 
     stage('Test') {
       steps {
-        sh 'npm run test'
+        bat 'npm run test'
       }
     }
 
-    stage('Publish JUnit Results') {
+    stage('Publibat JUnit Results') {
       steps {
         junit 'reports/junit/junit.xml'
       }
     }
 
-    stage('Publish HTML Report (optional)') {
+    stage('Publibat HTML Report (optional)') {
       steps {
         publishHTML(target: [
           reportDir: 'coverage',         // якщо ти використовуєш coverage
