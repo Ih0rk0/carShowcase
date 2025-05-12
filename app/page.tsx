@@ -1,3 +1,4 @@
+import React from "react";
 import { Hero } from "@/components";
 import { Searchbar } from "@/components/Searchbar";
 

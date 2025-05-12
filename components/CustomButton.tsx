@@ -3,7 +3,9 @@ import React from 'react'
 
 import { CustomButtonProps } from '@/app/types'
 
-export const CustomButton = ({title,containerStyles, handleClick,btnType}:CustomButtonProps) => {
+export const CustomButton: React.FC<CustomButtonProps> = ({ title, containerStyles, handleClick, btnType }) => {
+
+
      
     return (
         <button

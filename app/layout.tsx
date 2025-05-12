@@ -1,4 +1,7 @@
-import type { Metadata } from "next";
+import React from 'react';
+
+import { Metadata } from "next";
+
 import "./globals.css";
 import { Footer, Navbar } from "@/components";
 

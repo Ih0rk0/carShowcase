@@ -1,4 +1,5 @@
 'use client'
+import React from "react"
 import { CarInfo } from '@/app/types'
 import { CustomButton } from './CustomButton'
 import Image from 'next/image';
