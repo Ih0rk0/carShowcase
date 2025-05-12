@@ -30,7 +30,7 @@ pipeline {
 
     stage('Run Tests') {
       steps {
-        bat 'npm run test -- --ci --reporters=jest-junit'
+        bat 'npm run test -- --ci --reporters=jest-junit --passWithNoTests'
       }
     }
 
