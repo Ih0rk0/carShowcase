@@ -31,13 +31,13 @@ pipeline {
       }
     }
 
-    stage('Publibat JUnit Results') {
+    stage('Publish JUnit Results') {
       steps {
         junit 'reports/junit/junit.xml'
       }
     }
 
-    stage('Publibat HTML Report (optional)') {
+    stage('Publish HTML Report (optional)') {
       steps {
         publishHTML(target: [
           reportDir: 'coverage',         // якщо ти використовуєш coverage
