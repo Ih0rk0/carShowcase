@@ -8,7 +8,8 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
-        git 'https://github.com/Ih0rk0/carShowcase.git'
+       git branch: 'main', url: 'https://github.com/Ih0rk0/carShowcase.git'
+
       }
     }
 
