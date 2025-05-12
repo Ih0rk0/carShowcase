@@ -2,49 +2,64 @@ pipeline {
   agent any
 
   tools {
-    nodejs "NodeJS_18" // Назва NodeJS, задана в Jenkins (див. Manage Jenkins > Global Tool Configuration)
+    nodejs "NodeJS_18" // Назва NodeJS у Jenkins
+  }
+
+  environment {
+    CI = 'true'
   }
 
   stages {
-    stage('Clone') {
+    stage('Clone Repository') {
       steps {
-       git branch: 'main', url: 'https://github.com/Ih0rk0/carShowcase.git'
-
+        git branch: 'main', url: 'https://github.com/Ih0rk0/carShowcase.git'
       }
     }
 
-    stage('Install') {
+    stage('Install Dependencies') {
       steps {
         bat 'npm ci'
       }
     }
 
-    stage('Build') {
+    stage('Build Project') {
       steps {
         bat 'npm run build'
       }
     }
 
-    stage('Test') {
+    stage('Run Tests') {
       steps {
-        bat 'npm run test'
+        bat 'npm run test -- --ci --reporters=jest-junit'
       }
     }
 
     stage('Publish JUnit Results') {
       steps {
-        junit 'reports/junit/junit.xml'
+        junit 'junit.xml'
       }
     }
 
-    stage('Publish HTML Report (optional)') {
+    stage('Publish HTML Report') {
+      when {
+        expression { fileExists('coverage\\index.html') }
+      }
       steps {
         publishHTML(target: [
-          reportDir: 'coverage',         // якщо ти використовуєш coverage
+          reportDir: 'coverage',
           reportFiles: 'index.html',
           reportName: 'Coverage Report'
         ])
       }
+    }
+  }
+
+  post {
+    always {
+      echo 'Pipeline finished.'
+    }
+    failure {
+      echo 'Pipeline failed. Please check logs and reports.'
     }
   }
 }
